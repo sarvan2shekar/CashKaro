@@ -9,6 +9,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.testapp.sarvan.cashkaro.view.CarouselLinearLayout;
+import com.testapp.sarvan.cashkaro.view.HomeActivity;
+
 public class CarouselPagerAdapter extends FragmentPagerAdapter
         implements ViewPager.OnPageChangeListener {
 
@@ -37,7 +40,7 @@ public class CarouselPagerAdapter extends FragmentPagerAdapter
             position = position % HomeActivity.count;
 
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
         return ItemFragment.newInstance(context, position, scale);
     }

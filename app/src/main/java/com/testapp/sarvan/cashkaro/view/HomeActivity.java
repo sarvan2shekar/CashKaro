@@ -1,4 +1,4 @@
-package com.testapp.sarvan.cashkaro;
+package com.testapp.sarvan.cashkaro.view;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,18 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
+import com.testapp.sarvan.cashkaro.CarouselPagerAdapter;
+import com.testapp.sarvan.cashkaro.R;
+
 public class HomeActivity extends AppCompatActivity {
 
     public final static int LOOPS = 1000;
-    public static int count = 6; //ViewPager items size
-    /**
-     * You shouldn't define first page = 0.
-     * Let define firstpage = 'number viewpager size' to make endless carousel
-     */
+    public static int count = 6; //ViewPager items size should be dynamically got from CashKaro Web services
     public static int FIRST_PAGE = 6;
     private final int backDuration = 2000;
-    public CarouselPagerAdapter adapter;
     public ViewPager pager;
+    private CarouselPagerAdapter adapter;
     private boolean doubleBackToExitPressedOnce = false;
 
     @Override

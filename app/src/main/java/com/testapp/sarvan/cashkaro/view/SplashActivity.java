@@ -1,4 +1,4 @@
-package com.testapp.sarvan.cashkaro;
+package com.testapp.sarvan.cashkaro.view;
 
 import android.content.Intent;
 import android.os.Bundle;

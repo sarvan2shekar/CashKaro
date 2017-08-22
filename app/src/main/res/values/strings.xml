@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Cash Karo</string>
-    <string name="btn_open_store_txt">Open Store!</string>
+    <string name="btn_check_out">Check out</string>
     <string name="btn_close_txt">Close</string>
+    <string name="flipkart">Flipkart</string>
+    <string name="cashback">Cashback</string>
+    <string name="validity">Validity</string>
+
 </resources>

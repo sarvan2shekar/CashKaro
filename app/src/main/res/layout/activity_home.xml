@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.testapp.sarvan.cashkaro.HomeActivity">
+    android:background="#FFFFFF"
+    tools:context="com.testapp.sarvan.cashkaro.view.HomeActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/dealsCarousel"
+        layout_constraintEnd_toEndOf="parent"
+        layout_constraintStart_toStartOf="parent"
+        layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
 </android.support.constraint.ConstraintLayout>

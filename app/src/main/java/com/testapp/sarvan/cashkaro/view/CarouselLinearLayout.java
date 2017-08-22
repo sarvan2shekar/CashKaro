@@ -1,9 +1,12 @@
-package com.testapp.sarvan.cashkaro;
+package com.testapp.sarvan.cashkaro.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+
+import com.testapp.sarvan.cashkaro.CarouselPagerAdapter;
+
 
 /**
  * Created by sarva on 22-08-2017.
