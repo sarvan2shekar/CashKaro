@@ -5,4 +5,10 @@
     android:layout_height="match_parent"
     tools:context="com.testapp.sarvan.cashkaro.HomeActivity">
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/dealsCarousel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" />
+
 </android.support.constraint.ConstraintLayout>
