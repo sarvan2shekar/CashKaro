@@ -26,24 +26,21 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         pager = (ViewPager) findViewById(R.id.dealsCarousel);
 
-        //set page margin between pages for viewpager
         DisplayMetrics metrics = new DisplayMetrics();
 
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         int pageMargin = ((metrics.widthPixels / 4) * 2);
         pager.setPageMargin(-pageMargin);
-
         adapter = new CarouselPagerAdapter(this, getSupportFragmentManager());
         pager.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
         pager.addOnPageChangeListener(adapter);
-
-        // Set current item to the middle page so we can fling to both
-        // directions left and right
         pager.setCurrentItem(FIRST_PAGE);
         pager.setOffscreenPageLimit(3);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(getString(R.string.home_title));
+        }
     }
 
     @Override

@@ -7,10 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="@dimen/margin_10"
-    android:minHeight="180dp"
+    android:layout_margin="@dimen/margin_4"
+    android:minHeight="200dp"
     card_view:cardBackgroundColor="@color/cardview_light_background"
-    card_view:cardCornerRadius="@dimen/margin_4"
+    card_view:cardCornerRadius="@dimen/margin_default"
     card_view:layout_constraintBottom_toBottomOf="parent"
     card_view:layout_constraintLeft_toLeftOf="parent"
     card_view:layout_constraintRight_toRightOf="parent"
@@ -25,7 +25,7 @@
 
         <ImageView
             android:id="@+id/dealImageDetail"
-            android:layout_width="@dimen/margin_150"
+            android:layout_width="@dimen/margin_100"
             android:layout_height="@dimen/margin_50"
             android:layout_margin="@dimen/margin_default"
             android:contentDescription="@string/app_name"
@@ -37,13 +37,23 @@
             android:id="@+id/dealNameDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_50"
+            android:layout_margin="@dimen/margin_30"
+            android:layout_marginTop="@dimen/margin_20"
             android:textColor="@android:color/black"
             android:textSize="@dimen/text_20"
             app:layout_constraintBottom_toBottomOf="@id/dealImageDetail"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/dealImageDetail" />
 
+        <TextView
+            android:id="@+id/dealDetailValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/value"
+            app:layout_constraintLeft_toLeftOf="@id/dealImageDetail"
+            app:layout_constraintRight_toRightOf="@id/dealImageDetail"
+            app:layout_constraintTop_toBottomOf="@id/dealImageDetail" />
 
         <TextView
             android:id="@+id/dealDetailCB"
@@ -51,9 +61,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:text="@string/cashback"
-            app:layout_constraintLeft_toLeftOf="@id/dealImageDetail"
-            app:layout_constraintRight_toRightOf="@id/dealImageDetail"
-            app:layout_constraintTop_toBottomOf="@id/dealImageDetail" />
+            app:layout_constraintBottom_toBottomOf="@id/dealDetailValue"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dealDetailValue" />
 
         <TextView
             android:id="@+id/dealDetailValidity"
@@ -61,9 +72,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:text="@string/validity"
-            app:layout_constraintLeft_toLeftOf="@id/dealNameDetail"
+            app:layout_constraintBottom_toBottomOf="@id/dealDetailCB"
             app:layout_constraintRight_toRightOf="@id/dealNameDetail"
-            app:layout_constraintTop_toBottomOf="@id/dealImageDetail" />
+            app:layout_constraintTop_toTopOf="@id/dealDetailCB" />
+
+        <TextView
+            android:id="@+id/dealDetailValueValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/dealDetailValue"
+            app:layout_constraintRight_toRightOf="@id/dealDetailValue"
+            app:layout_constraintTop_toBottomOf="@id/dealDetailValue" />
 
         <TextView
             android:id="@+id/dealDetailCBValue"
@@ -89,10 +111,15 @@
 
         <Button
             android:id="@+id/btnCheckout"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20"
-            android:text="@string/btn_check_out"
+            android:background="@color/darkGreenButton"
+            android:padding="@dimen/margin_default"
+            android:text="@string/btn_get_offer"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dealDetailValidityValue" />

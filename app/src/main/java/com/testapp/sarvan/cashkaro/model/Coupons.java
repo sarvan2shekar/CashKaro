@@ -23,13 +23,15 @@ public class Coupons implements Parcelable {
     };
     private int drawable = 0;
     private String name = null;
+    private String value = null;
     private String cashback = null;
     private String validity = null;
 
-    public Coupons(int drawableId, String name, String cashback,
+    public Coupons(int drawableId, String name, String value, String cashback,
                    String validity) {
         this.drawable = drawableId;
         this.name = name;
+        this.value = value;
         this.cashback = cashback;
         this.validity = validity;
     }
@@ -40,6 +42,7 @@ public class Coupons implements Parcelable {
     protected Coupons(Parcel in) {
         drawable = in.readInt();
         name = in.readString();
+        value = in.readString();
         cashback = in.readString();
         validity = in.readString();
     }
@@ -59,6 +62,15 @@ public class Coupons implements Parcelable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
 
     public String getCashback() {
         return cashback;
@@ -85,6 +97,7 @@ public class Coupons implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(drawable);
         parcel.writeString(name);
+        parcel.writeString(value);
         parcel.writeString(cashback);
         parcel.writeString(validity);
     }

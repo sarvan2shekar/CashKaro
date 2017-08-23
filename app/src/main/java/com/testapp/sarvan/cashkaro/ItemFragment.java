@@ -32,7 +32,7 @@ public class ItemFragment extends Fragment {
     private Coupons couponFlipkart1, couponFlipkart2, couponFlipkart3, couponAmazon1, couponAmazon2,
             couponJabong1, couponJabong2, couponNykaa1, couponNykaa2, couponMyntra1,
             couponMyntra2, couponShopclues1, couponShopclues2;
-    private ArrayList<Coupons> couponsArrayList = new ArrayList<Coupons>();
+    private ArrayList<Coupons> couponsArrayList;
 
     private int[] imageArray = new int[]{R.drawable.flipkart, R.drawable.amazon,
             R.drawable.jabong, R.drawable.nykaa, R.drawable.myntra,
@@ -58,24 +58,24 @@ public class ItemFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        couponFlipkart1 = new Coupons(R.drawable.flipkart, "flipkart", "40%", "30th Aug, 2017");
-        couponFlipkart2 = new Coupons(R.drawable.flipkart, "flipkart", "20%", "30th Sep, 2017");
-        couponFlipkart3 = new Coupons(R.drawable.flipkart, "flipkart", "10%", "20th Sep, 2017");
+        couponFlipkart1 = new Coupons(R.drawable.flipkart, getString(R.string.flipkart), "250 Rs.", "40%", "30th Aug, 2017");
+        couponFlipkart2 = new Coupons(R.drawable.flipkart, getString(R.string.flipkart), "100 Rs.", "20%", "30th Sep, 2017");
+        couponFlipkart3 = new Coupons(R.drawable.flipkart, getString(R.string.flipkart), "50 Rs.", "10%", "20th Sep, 2017");
 
-        couponAmazon1 = new Coupons(R.drawable.amazon, "amazon", "10%", "15th Sep, 2017");
-        couponAmazon2 = new Coupons(R.drawable.amazon, "amazon", "60%", "30th Oct, 2017");
+        couponAmazon1 = new Coupons(R.drawable.amazon, getString(R.string.amazon), "50 Rs.", "10%", "15th Sep, 2017");
+        couponAmazon2 = new Coupons(R.drawable.amazon, getString(R.string.amazon), "2500 Rs.", "60%", "30th Oct, 2017");
 
-        couponJabong1 = new Coupons(R.drawable.jabong, "jabong", "30%", "30th Nov, 2017");
-        couponJabong2 = new Coupons(R.drawable.jabong, "jabong", "25%", "30th Jan, 2018");
+        couponJabong1 = new Coupons(R.drawable.jabong, getString(R.string.jabong), "999 Rs.", "30%", "30th Nov, 2017");
+        couponJabong2 = new Coupons(R.drawable.jabong, getString(R.string.jabong), "499 Rs.", "25%", "30th Jan, 2018");
 
-        couponNykaa1 = new Coupons(R.drawable.nykaa, "nykaa", "13%", "31st Aug, 2017");
-        couponNykaa2 = new Coupons(R.drawable.nykaa, "nykaa", "20%", "2nd Sep, 2017");
+        couponNykaa1 = new Coupons(R.drawable.nykaa, getString(R.string.nykaa), "1000 Rs.", "13%", "31st Aug, 2017");
+        couponNykaa2 = new Coupons(R.drawable.nykaa, getString(R.string.nykaa), "2500 Rs.", "20%", "2nd Sep, 2017");
 
-        couponMyntra1 = new Coupons(R.drawable.myntra, "myntra", "60%", "4th Dec, 2017");
-        couponMyntra2 = new Coupons(R.drawable.myntra, "myntra", "70%", "30th Jun, 2018");
+        couponMyntra1 = new Coupons(R.drawable.myntra, getString(R.string.myntra), "500 Rs.", "60%", "4th Dec, 2017");
+        couponMyntra2 = new Coupons(R.drawable.myntra, getString(R.string.myntra), "140 Rs.", "70%", "30th Jun, 2018");
 
-        couponShopclues1 = new Coupons(R.drawable.shopclues, "shopclues", "80%", "14th Oct, 2017");
-        couponShopclues2 = new Coupons(R.drawable.shopclues, "shopclues", "16%", "10th Sep, 2017");
+        couponShopclues1 = new Coupons(R.drawable.shopclues, getString(R.string.shopclues), "222 Rs.", "80%", "14th Oct, 2017");
+        couponShopclues2 = new Coupons(R.drawable.shopclues, getString(R.string.shopclues), "111 Rs.", "16%", "10th Sep, 2017");
     }
 
     @Override
@@ -102,7 +102,7 @@ public class ItemFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DealStorePageActivity.class);
                 intent.putExtra(NAME_RESOURE, dealArray[postion]);
-
+                couponsArrayList = new ArrayList<Coupons>();
                 switch (dealArray[postion]) {
                     case "flipkart":
                         couponsArrayList.add(couponFlipkart1);

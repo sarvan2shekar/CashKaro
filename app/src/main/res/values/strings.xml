@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Cash Karo</string>
-    <string name="btn_check_out">Check out</string>
+    <string name="btn_get_offer">Get Offer</string>
     <string name="btn_close_txt">Close</string>
     <string name="flipkart">Flipkart</string>
+    <string name="amazon">Amazon</string>
+    <string name="jabong">Jabong</string>
+    <string name="nykaa">Nykaa</string>
+    <string name="myntra">Myntra</string>
+    <string name="shopclues">Shopclues</string>
+    <string name="value">Value</string>
     <string name="cashback">Cashback</string>
     <string name="validity">Validity</string>
-
+    <string name="home_title">Select a Deal</string>
 </resources>
