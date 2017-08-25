@@ -12,4 +12,8 @@
     <string name="cashback">Cashback</string>
     <string name="validity">Validity</string>
     <string name="home_title">Select a Deal</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="camera">Ask for Camera</string>
+    <string name="location">Ask for Location</string>
 </resources>
