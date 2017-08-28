@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="menuVals">
+        <item>Login</item>
+        <item>Ask for Camera</item>
+        <item>Ask for Location</item>
+        <item>Refer Friends</item>
+        <item>Help</item>
+        <item>About</item>
+    </array>
+</resources>

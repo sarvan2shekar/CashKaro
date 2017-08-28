@@ -26,14 +26,16 @@ public class Coupons implements Parcelable {
     private String value = null;
     private String cashback = null;
     private String validity = null;
+    private String url = null;
 
     public Coupons(int drawableId, String name, String value, String cashback,
-                   String validity) {
+                   String validity, String url) {
         this.drawable = drawableId;
         this.name = name;
         this.value = value;
         this.cashback = cashback;
         this.validity = validity;
+        this.url = url;
     }
 
     public Coupons() {
@@ -45,6 +47,7 @@ public class Coupons implements Parcelable {
         value = in.readString();
         cashback = in.readString();
         validity = in.readString();
+        url = in.readString();
     }
 
     public int getDrawable() {
@@ -88,6 +91,15 @@ public class Coupons implements Parcelable {
         this.validity = validity;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -100,5 +112,6 @@ public class Coupons implements Parcelable {
         parcel.writeString(value);
         parcel.writeString(cashback);
         parcel.writeString(validity);
+        parcel.writeString(url);
     }
 }

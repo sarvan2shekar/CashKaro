@@ -1,10 +1,15 @@
 package com.testapp.sarvan.cashkaro.view;
 
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +17,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
@@ -31,15 +37,17 @@ public class HomeActivity extends AppCompatActivity {
     private final int backDuration = 2000;
     private final int MY_PERMISSIONS_REQUEST_CAMERA = 998;
     private final int MY_PERMISSIONS_REQUEST_LOCATION = 999;
+    private final int REQUEST_PERMISSION_SETTING = 997;
     public ViewPager pager;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-    private String[] mMenuTitles;
+    protected DrawerLayout mDrawerLayout;
+    protected ListView mDrawerList;
+    protected ActionBarDrawerToggle mDrawerToggle;
+    protected CharSequence mDrawerTitle;
+    protected CharSequence mTitle;
+    protected String[] mMenuTitles;
     private CarouselPagerAdapter adapter;
     private boolean doubleBackToExitPressedOnce = false;
+    private SharedPreferences permissionStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(getString(R.string.home_title));
         }
-
+        permissionStatus = getSharedPreferences("permissionStatus", MODE_PRIVATE);
         pager = (ViewPager) findViewById(R.id.dealsCarousel);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -133,27 +141,49 @@ public class HomeActivity extends AppCompatActivity {
         return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
-    public boolean getPermission(String permission, int requestCode) {
-        if (ContextCompat.checkSelfPermission(HomeActivity.this,
-                permission) != PackageManager.PERMISSION_GRANTED) {
-            System.out.println("Test permission");
-            // Should we show an explanation?
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(HomeActivity.this,
-//                    permission)) {
-//                //TODO implement snackbar
-//                // Show an explanation to the user *asynchronously* -- don't block
-//                // this thread waiting for the user's response! After the user
-//                // sees the explanation, try again to request the permission.
-//
-//
-//            } else {
+    public void getPermission(String permissionName, final String permission, final int requestCode) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(HomeActivity.this,
+                permission)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+            builder.setTitle("Need " + permissionName + " Permission.");
+            builder.setMessage("This app needs" + permissionName + " permission!");
+            builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    ActivityCompat.requestPermissions(HomeActivity.this,
+                            new String[]{permission}, requestCode);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    Toast.makeText(HomeActivity.this, "Permission denied :(", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.show();
+        } else if (permissionStatus.getBoolean(permission, false)) {
+            //Previously Permission Request was cancelled with 'Dont Ask Again',
+            // Redirect to Settings after showing Information about why you need the permission
+            Toast.makeText(getBaseContext(), "Go to Settings to Grant Permission",
+                    Toast.LENGTH_LONG).show();
+            Intent i = new Intent();
+            i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            i.addCategory(Intent.CATEGORY_DEFAULT);
+            i.setData(Uri.parse("package:" + getPackageName()));
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            startActivity(i);
+        } else {
             ActivityCompat.requestPermissions(HomeActivity.this,
                     new String[]{permission},
                     requestCode);
-//            }
-            return false;
+            SharedPreferences.Editor editor = permissionStatus.edit();
+            editor.putBoolean(permission, true);
+            editor.apply();
         }
-        return true;
     }
 
     @Override
@@ -161,14 +191,11 @@ public class HomeActivity extends AppCompatActivity {
                                            int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CAMERA: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
+                    Toast.makeText(this, "Permission granted.", Toast.LENGTH_LONG).show();
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Permission denied :(", Toast.LENGTH_LONG).show();
                 }
                 break;
             }
@@ -176,35 +203,33 @@ public class HomeActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
+                    Toast.makeText(this, "Permission granted.", Toast.LENGTH_LONG).show();
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Permission denied :(", Toast.LENGTH_LONG).show();
                 }
                 break;
             }
         }
     }
 
-    private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
+    public class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
             String selectedVal = (adapterView.getItemAtPosition(position)).toString();
-            System.out.println("Item clicked: " +
-                    selectedVal);
             if (selectedVal.trim().equalsIgnoreCase(getString(R.string.camera))) {
-                if (getPermission(Manifest.permission.CAMERA, MY_PERMISSIONS_REQUEST_CAMERA)) {
-                    Snackbar.make(view, "Permission already granted.", Snackbar.LENGTH_LONG).show();
+                if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    getPermission("Camera", Manifest.permission.CAMERA, MY_PERMISSIONS_REQUEST_CAMERA);
                 } else {
-                    Snackbar.make(view, "Please request permission.", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "Permission already granted.", Snackbar.LENGTH_LONG).show();
                 }
             } else if (selectedVal.trim().equalsIgnoreCase(getString(R.string.location))) {
-                if (getPermission(Manifest.permission.ACCESS_COARSE_LOCATION,
-                        MY_PERMISSIONS_REQUEST_LOCATION)) {
-                    Snackbar.make(view, "Permission already granted.", Snackbar.LENGTH_LONG).show();
+                if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    getPermission("Location", Manifest.permission.ACCESS_COARSE_LOCATION,
+                            MY_PERMISSIONS_REQUEST_LOCATION);
                 } else {
-                    Snackbar.make(view, "Please request permission.", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "Permission already granted.", Snackbar.LENGTH_LONG).show();
                 }
             }
             mDrawerLayout.closeDrawer(GravityCompat.START);

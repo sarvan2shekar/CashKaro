@@ -16,4 +16,16 @@
     <string name="drawer_close">Close Drawer</string>
     <string name="camera">Ask for Camera</string>
     <string name="location">Ask for Location</string>
+    <string name="url_flipkart">https://www.flipkart.com/</string>
+    <string name="url_amazon">https://www.amazon.in/</string>
+    <string name="url_jabong">https://www.jabong.com/</string>
+    <string name="url_nykaa">http://www.nykaa.com/</string>
+    <string name="url_myntra">https://www.myntra.com/</string>
+    <string name="url_shopclues">http://www.shopclues.com/</string>
+    <string name="title_activity_home_grid">HomeGridActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
