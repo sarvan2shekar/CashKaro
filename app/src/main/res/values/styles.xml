@@ -20,4 +20,19 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ck_app_theme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/ck_bg</item>
+        <item name="android:listViewStyle">@style/CKTransparentListView</item>
+        <item name="android:expandableListViewStyle">@style/CKTransparentExpandableListView</item>
+    </style>
+
+    <style name="CKTransparentListView" parent="@android:style/Widget.ListView">
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+    </style>
+
+    <style name="CKTransparentExpandableListView" parent="@android:style/Widget.ExpandableListView">
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+    </style>
+
 </resources>
